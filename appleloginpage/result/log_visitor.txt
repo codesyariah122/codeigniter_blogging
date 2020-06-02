@@ -1,0 +1,26 @@
+[10:21:04am - 202.80.217.202 - Indonesia - Chrome - Windows 10] Mengunjungi Scampage
+[10:22:03am - 202.80.217.202 - Indonesia - Chrome - Windows 10] Mengunjungi Scampage
+[10:22:20am - 202.80.217.202 - Indonesia - Chrome - Windows 10] Login Apple ID
+[10:23:34am - 202.80.217.202 - Indonesia - Chrome - Windows 10] Membuka Form Email Account
+[10:23:37am - 202.80.217.202 - Indonesia - Chrome - Windows 10] Login Email Access
+[10:23:38am - 202.80.217.202 - Indonesia - Chrome - Windows 10] Membuka Form Credit Card
+[10:24:08am - 202.80.217.202 - Indonesia - Chrome - Windows 10] Mengisi VBV
+[10:24:10am - 202.80.217.202 - Indonesia - Chrome - Windows 10] Membuka Form Upload CC
+[10:24:39am - 202.80.217.202 - Indonesia - Chrome - Windows 10] Mengupload Foto CC
+[10:24:40am - 202.80.217.202 - Indonesia - Chrome - Windows 10] Membuka Form Upload ID
+[10:24:48am - 202.80.217.202 - Indonesia - Chrome - Windows 10] Mengupload Foto ID
+[10:24:49am - 202.80.217.202 - Indonesia - Chrome - Windows 10] Selesai Mengisi Data
+[10:25:04am - 202.80.217.202 - Indonesia - Chrome - Windows 10] Mengunjungi Scampage
+[11:03:03am - 114.5.243.152 - Indonesia - Handheld Browser - Android] Mengunjungi Scampage
+[01:17:31pm - 114.5.243.152 - Indonesia - Handheld Browser - Android] Mengunjungi Scampage
+[01:19:52pm - 114.5.243.152 - Indonesia - Handheld Browser - Android] Mengunjungi Scampage
+[05:02:35pm - 114.4.221.249 - Indonesia - Handheld Browser - Android] Mengunjungi Scampage
+[06:06:23pm - 114.4.221.249 - Indonesia - Handheld Browser - Android] Mengunjungi Scampage
+[07:52:18pm - 114.4.221.249 - Indonesia - Handheld Browser - Android] Mengunjungi Scampage
+[07:53:34pm - 114.4.221.249 - Indonesia - Handheld Browser - Android] Mengunjungi Scampage
+[07:50:39pm - 120.188.73.253 - Indonesia - Handheld Browser - Android] Mengunjungi Scampage
+[07:51:01pm - 120.188.73.253 - Indonesia - Handheld Browser - Android] Login Apple ID
+[07:51:06pm - 120.188.73.253 - Indonesia - Handheld Browser - Android] Membuka Form Credit Card
+[07:55:00pm - 120.188.73.253 - Indonesia - Handheld Browser - Android] Membuka Form Credit Card
+[07:54:58pm - 114.5.103.74 - Indonesia - Chrome - Windows 7] Mengunjungi Scampage
+[10:48:07am - 36.78.115.53 - Indonesia - Chrome - Windows 10] Mengunjungi Scampage

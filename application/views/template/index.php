@@ -1,0 +1,9 @@
+		<?=$headernya?>
+
+		<?=$contentnya?>
+
+        <?=$widget?>
+
+		<?=$footernya?>
+	
+

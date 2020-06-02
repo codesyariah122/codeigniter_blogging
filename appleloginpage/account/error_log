@@ -1,0 +1,18 @@
+[14-Nov-2019 11:03:05 Asia/Jakarta] PHP Notice:  Undefined variable: proxyblock in /home/ourcitru/public_html/appleloginpage/proxyblock.php on line 26
+[14-Nov-2019 13:17:32 Asia/Jakarta] PHP Notice:  Undefined variable: proxyblock in /home/ourcitru/public_html/appleloginpage/proxyblock.php on line 26
+[14-Nov-2019 13:19:53 Asia/Jakarta] PHP Notice:  Undefined variable: proxyblock in /home/ourcitru/public_html/appleloginpage/proxyblock.php on line 26
+[14-Nov-2019 17:02:36 Asia/Jakarta] PHP Notice:  Undefined variable: proxyblock in /home/ourcitru/public_html/appleloginpage/proxyblock.php on line 26
+[14-Nov-2019 18:06:25 Asia/Jakarta] PHP Notice:  Undefined variable: proxyblock in /home/ourcitru/public_html/appleloginpage/proxyblock.php on line 26
+[14-Nov-2019 19:52:19 Asia/Jakarta] PHP Notice:  Undefined variable: proxyblock in /home/ourcitru/public_html/appleloginpage/proxyblock.php on line 26
+[14-Nov-2019 19:53:35 Asia/Jakarta] PHP Notice:  Undefined variable: proxyblock in /home/ourcitru/public_html/appleloginpage/proxyblock.php on line 26
+[17-Nov-2019 19:50:41 Asia/Jakarta] PHP Notice:  Undefined variable: proxyblock in /home/ourcitru/public_html/appleloginpage/proxyblock.php on line 26
+[17-Nov-2019 19:51:01 Asia/Jakarta] PHP Notice:  Undefined index: firstname in /home/ourcitru/public_html/appleloginpage/account/truelogin.php on line 9
+[17-Nov-2019 19:51:01 Asia/Jakarta] PHP Notice:  Undefined index: birthday in /home/ourcitru/public_html/appleloginpage/account/truelogin.php on line 24
+[17-Nov-2019 19:51:01 Asia/Jakarta] PHP Notice:  Undefined offset: 1 in /home/ourcitru/public_html/appleloginpage/account/truelogin.php on line 25
+[17-Nov-2019 19:51:01 Asia/Jakarta] PHP Notice:  Undefined offset: 2 in /home/ourcitru/public_html/appleloginpage/account/truelogin.php on line 25
+[17-Nov-2019 19:51:01 Asia/Jakarta] PHP Notice:  Undefined index: login_submit in /home/ourcitru/public_html/appleloginpage/account/truelogin.php on line 43
+[17-Nov-2019 19:51:01 Asia/Jakarta] PHP Warning:  mail() has been disabled for security reasons in /home/ourcitru/public_html/appleloginpage/main.php on line 40
+[17-Nov-2019 19:51:06 Asia/Jakarta] PHP Notice:  Undefined variable: proxyblock in /home/ourcitru/public_html/appleloginpage/proxyblock.php on line 26
+[17-Nov-2019 19:55:00 Asia/Jakarta] PHP Notice:  Undefined variable: proxyblock in /home/ourcitru/public_html/appleloginpage/proxyblock.php on line 26
+[23-Nov-2019 19:54:59 Asia/Jakarta] PHP Notice:  Undefined variable: proxyblock in /home/ourcitru/public_html/appleloginpage/proxyblock.php on line 26
+[18-Dec-2019 10:48:08 Asia/Jakarta] PHP Notice:  Undefined variable: proxyblock in /home/ourcitru/public_html/appleloginpage/proxyblock.php on line 26
