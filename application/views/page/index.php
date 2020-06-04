@@ -1,5 +1,3 @@
-
-
 <div id="colorlib-work">
     <div class="container">
         <div class="row text-center">
@@ -28,13 +26,16 @@
                                     ?>">
                                     <div class="work-img js-fullheight" style="background-image: url(
 											<?php
-                                            if ($k->img == NULL) :
+                                            if ($k->img == NULL AND $k->url !== "office") :
                                                 echo base_url("assets/images/page/slider6.jpg");
                                             else :
                                                 echo $page_img . $k->img;
                                             endif;
                                             ?>
-											);">
+                                            );">
+                                    <?php if($k->url === "office"): ?>
+                                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d253193.07575233828!2d112.55525991640626!3d-7.4495591000000045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7e140ece8a251%3A0x86e9782da383abc2!2sPT%20Gemilang%20Citrus%20Berjaya!5e0!3m2!1sid!2sid!4v1591139409201!5m2!1sid!2sid" width="600" height="550" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                                    <?php endif;?>
                                     </div>
                                 </div>
                             </div>

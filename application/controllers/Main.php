@@ -26,7 +26,40 @@ class Main extends CI_Controller {
         $data['MainSlide'] = $this->M_Data->MainSlide()->result();
         //$data['allproduct'] = $this->M_Data->allproduct()->result();
         $data['text_wa'] = "Hallo!%20Admin%20OurCitrus";
-		
+
+
+        $datauser = $this->db->query("SELECT * FROM `data_user`")->row_array();
+        // var_dump($datauser); 
+        // echo "<br/>\n";
+        // echo $datauser['value'];
+        // die;
+        $iddatauser = $datauser['id'];
+        $value = $datauser['value'];
+        // if(!$datauser) {
+        //     if($this->agent->is_browser()){
+        //         $agent = $this->agent->browser().' ' .$this->agent->version();
+        //     }elseif($this->agent->is_mobile()){
+        //         $agent = $this->agent->mobile();
+        //     }else{
+        //         $agent = "data user gagal didapatkan";
+        //     }
+        //     $value = 1;
+        //     $datauser = [
+        //         'id' => '',
+        //         'browser' => $agent,
+        //         'sistem_operasi' => $this->agent->platform(),
+        //         'ip_address' => $this->input->ip_address(),
+        //         'value' => $value
+        //     ];
+        //     $this->M_Data->datauser($datauser);	
+        // }else{
+        //     $where = [
+        //         'id'=> $iddatauser
+        //     ];
+        //     $dataupdatedatauser = ['value' => $value+1];
+        //     $this->M_Data->updatedatauser($dataupdatedatauser, $where);
+        // }
+        	
 		$this->template->myLayout('main', $data);
     }
 	public function home()
@@ -40,8 +73,44 @@ class Main extends CI_Controller {
 		$data['hallo'] = "Hallo World";
         $data['MainSlide'] = $this->M_Data->MainSlide()->result();
 		$data['text_wa'] = "Hallo!%20Admin%20OurCitrus";
-		//$data['cari'] = $this->M_Data->cariproduk();
-		
+        //$data['cari'] = $this->M_Data->cariproduk();
+        //sekarang gua mau coba sebuah fungsi di codeigniter untuk mendapatkan data user
+        //nama nya user agent 
+        //kebetulan gua punya database sql
+        $datauser = $this->db->query("SELECT * FROM `data_user`")->row_array();
+        // var_dump($datauser);
+        // echo "<br/>\n";
+        // echo $datauser['sistem_operasi'];
+        // die;
+
+        $datavalue = $datauser['value'];
+        $iduser = $datauser['id'];
+		if(!$datauser['sistem_operasi']){
+            if($this->agent->is_browser()){
+                $agent = $this->agent->browser() ." ". $this->agent->version();
+            }elseif($this->agent->is_mobile()){
+                $agent = $this->agent->mobile();
+            }else{
+                $agent = "tidak terdeteksi";
+            }
+            $value =  1;
+            $data_user = [
+                'id' => '',
+                'browser' => $agent,
+                'sistem_operasi' => $this->agent->platform(),
+                'ip_address' => $this->input->ip_address(),
+                'value' => $value
+            ];
+            $this->M_Data->datauser($data_user);
+        }else{
+            $data_user = [
+                'value' => $datavalue+1
+            ];
+        //    echo $datauser['sistem_operasi']; die;
+            $where = ['id' => $iduser];
+            $this->M_Data->updatedatauser($data_user, $where);
+        }
+
 		$this->template->myLayout('main', $data);
 	}
 

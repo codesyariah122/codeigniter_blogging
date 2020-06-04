@@ -15,7 +15,7 @@
 										<div class="desc">
 											<span class="tag"><?php if($slide1->small == "produk"): echo "ourcitrus | "; else: echo ""; endif;?><?=$slide1->small?> <?php echo $slide1->link != NULL ? "| page" : "";?> </span>
 											<h2><?=ucwords($slide1->header)?></h2>
-											<p style="color:silver;"><?=$slide1->truncate?></p>
+											<p style="color:silver;"><?=substr($slide1->truncate, 0, $num_char)?></p>
                                             <?php if($slide1->link === "post"):?>
                                                 <a href="<?=base_url().$slide1->link?>" class="btn-view btn-block text-center">View News<i class="icon-arrow-right3"></i></a>
                                             <?php endif;?>

@@ -27,8 +27,8 @@ class Template {
 						];
 		$data['nav_produk'] = 
 							[
-							'Kosmetik' => base_url('produk/index/kosmetik'),
-                            'Nutrisi' => base_url('produk/index/nutrisi')
+							'Cosmetics' => base_url('produk/index/kosmetik'),
+                            'Nutrition' => base_url('produk/index/nutrisi')
                             // 'Cosmetics' => base_url('produk/ourcitrus/kosmetik'),
 							// 'Nutrition' => base_url('produk/ourcitrus/nutrisi')
                             ];
@@ -61,7 +61,7 @@ class Template {
 											'work-5.jpg',
 											'work-6.jpg'
 							];
-        $data['num_char'] = 350;
+        $data['num_char'] = 500;
         $data['whatsapp'] = '<script async data-id="25057" src="https://cdn.widgetwhats.com/script.min.js"></script>';
         //$data['add_this'] = '<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e2a9fa6ad878af1"></script>';
         $data['add_this'] = '<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e2a9fa6ad878af1"></script>

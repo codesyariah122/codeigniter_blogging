@@ -68,20 +68,6 @@ class UserPage extends CI_Controller {
             redirect('UserPage/UsersManagement');
         }
 
-    public function changepassword()
-    {
-        $data['user'] = $this->db->get_where('user', ['email'=>$this->session->userdata('email')])->row_array();
-        $data['title'] = "Change Password";
-        $data['role'] = $this->session->userdata('role');
-        $data['link'] = $this->session->userdata('link');
-
-        $this->load->view('Admin/templates/header', $data);
-        $this->load->view('Admin/templates/sidebar', $data);
-        $this->load->view('Admin/templates/topbar', $data);
-        $this->load->view('Admin/user/index', $data);
-        $this->load->view('Admin/templates/footer');
-    }
-
     public function EditProfile()
     {  
         $data['title'] = "Edit Profile";
@@ -147,6 +133,48 @@ class UserPage extends CI_Controller {
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Update profile success</div>');
         redirect('UserPage');
+    }
+
+    public function changepassword()
+    {
+        $data['user'] = $this->db->get_where('user', ['email'=>$this->session->userdata('email')])->row_array();
+        // var_dump($data['user']);
+        // die;
+        $data['title'] = "Change Password";
+        $data['role'] = $this->session->userdata('role');
+        $data['link'] = $this->session->userdata('link');
+
+        $this->form_validation->set_rules('current_password', 'Change Password', 'required|trim');
+        $this->form_validation->set_rules('new_password1', 'New Password', 'required|trim|min_length[8]|matches[new_password2]');
+        $this->form_validation->set_rules('new_password2', 'New Password', 'required|trim|min_length[8]|matches[new_password1]');
+
+        if($this->form_validation->run() === false){
+        $this->load->view('Admin/templates/header', $data);
+        $this->load->view('Admin/templates/sidebar', $data);
+        $this->load->view('Admin/templates/topbar', $data);
+        $this->load->view('Admin/user/changepassword', $data);
+        $this->load->view('Admin/templates/footer');
+        }else{
+            $current_password = $this->input->post('current_password');
+            $new_password = $this->input->post('new_password1');
+            if(!password_verify($current_password, $data['user']['password'])){
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> Current Password Wrong </div>');
+                redirect('UserPage/changepassword');
+            }else{
+                if($current_password === $new_password){
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">New password canot be the same as current password</div>');
+                    redirect('UserPage/changepassword');
+                }else{
+                    $password_hash = password_hash($new_password, PASSWORD_DEFAULT);
+                    $this->db->set('password', $password_hash);
+                    $this->db->where('email', $this->session->userdata('email'));
+                    $this->db->update('user');
+
+                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Password Change </div>');
+                    redirect('UserPage/changepassword');
+                }
+            }
+        }
     }
 
 

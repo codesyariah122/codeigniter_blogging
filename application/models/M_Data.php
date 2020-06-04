@@ -155,7 +155,19 @@ class M_Data extends CI_Model {
 	{
 		$this->db->where($where);
 		$this->db->delete($table);
-	}
+    }
+    
+    public function datauser($data)
+    {
+        $this->db->insert('data_user', $data);
+    }
+
+    public function updatedatauser($data, $where)
+    {
+        $this->db->set($data);
+        $this->db->where($where);
+        $this->db->update('data_user');
+    }
 
 
 }
