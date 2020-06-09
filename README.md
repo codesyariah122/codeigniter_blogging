@@ -12,7 +12,7 @@ author : **Puji Ermanto**
 phone  : **+62 882 2266 8778**  
 -------------------------------------------------------------------------------------------------------------------------------  
 
- [![testing website](https://github.com/codesyariah122/codeigniter_blogging/blob/master/untitled3.mp4)] (https://ourctirus.id/)  
+ ![](https://github.com/codesyariah122/codeigniter_blogging/blob/master/untitled3.mp4)
 
  [![Puji Ermanto Profile Site](https://github.com/codesyariah122/codeigniter_blogging/blob/master/s7.png)](https://ourcitrus.id/)  
 
