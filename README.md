@@ -12,7 +12,12 @@ author : **Puji Ermanto**
 phone  : **+62 882 2266 8778**  
 -------------------------------------------------------------------------------------------------------------------------------  
 
- ![](https://github.com/codesyariah122/codeigniter_blogging/blob/master/untitled3.mp4)
+<video width="400" controls>
+  <source src="https://github.com/codesyariah122/codeigniter_blogging/blob/master/untitled3.mp4" type="video/mp4">
+  <source src="mov_bbb.ogg" type="video/ogg">
+  Your browser does not support HTML video.
+</video>
+
 
  [![Puji Ermanto Profile Site](https://github.com/codesyariah122/codeigniter_blogging/blob/master/s7.png)](https://ourcitrus.id/)  
 
