@@ -11,10 +11,9 @@ class Post extends CI_Controller {
     public function index()
     {
         $data['login'] = $this->session->userdata('email');
-        $data['index_title'] = "Ourcitrus News";
         $config['base_url'] = base_url('post/index'); //site url
         $config['total_rows'] = $this->M_Data->countAllpost(); //total row
-        $config['per_page'] = 3;  //show record per halaman
+        $config['per_page'] = 5;  //show record per halaman
         $config["uri_segment"] = 3;  // uri parameter
         $choice = $config["total_rows"] / $config["per_page"];
         $config["num_links"] = floor($choice);
@@ -39,17 +38,23 @@ class Post extends CI_Controller {
  
         $this->pagination->initialize($config);
         $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
- 
         //panggil function get_mahasiswa_list yang ada pada mmodel mahasiswa_model. 
-        $data['post'] = $this->post->infoterbaru($config["per_page"], $data['page']);           
- 
+        $data['post'] = $this->post->infoterbaru($config["per_page"], $data['page']);    
         $data['pagination'] = $this->pagination->create_links();
-        $data['meta_index'] = "ourcitrus | website";
-        $data['meta_author'] = "pujiermanto";
-        $data['meta_content'] = "HomePage Ourcitrus by Pt.Gemilang Citrus Berjaya";
-        $data['meta_website_name'] = "OurCitrus By PT. Gemilang Citrus Berjaya";
-        $data['meta_uri'] = $_SERVER['REQUEST_URI'];
-		$this->template->myLayout('post/index', $data);
+        $link = $this->uri->segment(1);
+        $data['MainSlide'] = $this->db->query("SELECT * FROM `slide_img` WHERE `link` = '$link'")->result();
+        // var_dump($data['MainSlide']); die;
+        
+        $data['post_index'] = $this->db->query("SELECT * FROM `info_terbaru`")->result();
+        $data['index_title'] = ucwords($data['MainSlide'][0]->header);
+        $data['short_title'] = "OurCitrus News | ".$this->uri->segment(1);
+        $data['og_title'] = "OurCitrus News | ".$this->uri->segment(1);
+        $data['og_description'] = $data['MainSlide'][0]->truncate;
+        $data['og_url'] = base_url().$this->uri->segment(1).'/';        
+        for($i=0; $i<=count($data['post_index'])-1; $i++){
+           $data['og_image'] = base_url('assets/images/post/').$data['post_index'][$i]->image;
+        }
+        $this->template->myLayout('post/index', $data);
     }
     
     public function insertPost()
@@ -162,12 +167,18 @@ class Post extends CI_Controller {
         // $link = strtolower($query['judul']);
         $data['viewpost'] = $this->post->viewpost();
         // var_dump($data['viewpost']);
-        // echo $data['uri_read'];die;
-        $data['meta_index'] = "ourcitrus | website";
-        $data['meta_author'] = "pujiermanto";
-        $data['meta_content'] = "HomePage Ourcitrus by Pt.Gemilang Citrus Berjaya";
-        $data['meta_website_name'] = "OurCitrus By PT. Gemilang Citrus Berjaya";
-        $data['meta_uri'] = $_SERVER['REQUEST_URI'];                                                                                                                                                                    
+        // echo "<br/><br/>\n";
+        // echo $data['viewpost'][0]->image;
+        // die;
+        $data['index_title'] = "Ourcitrus News | ".$this->uri->segment(3);
+        $data['og_title'] = $data['viewpost'][0]->content;
+        $data['og_author'] = $data['viewpost'][0]->author;
+        $data['header_title'] = $data['viewpost'][0]->judul;
+        $data['short_title'] = $this->uri->segment(3);
+        $data['og_url'] = base_url().$this->uri->segment(1).'/'.$this->uri->segment(2).'/'.$this->uri->segment(3).'/';
+        $data['og_description'] = $data['viewpost'][0]->content;
+        $data['og_image'] = base_url('assets/images/post/').$data['viewpost'][0]->image;
+
         $this->template->myLayout('post/read', $data);
     }
 

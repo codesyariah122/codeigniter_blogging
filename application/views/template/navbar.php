@@ -63,11 +63,16 @@
 				<div class="row">
 					<div class="col-md-12">
 						<h2 class="head-title">Gallery</h2>
-						<?php foreach($img_cp as $work):?>
-						<a href="<?=$work;?>" class="gallery image-popup-link text-center" style="background-image: url(<?=$img_url.$work;?>);">
+						<?php for($i=0; $i<=count($img_cp)-1; $i++):?>
+						<a href="<?=$slider_img?><?=$img_cp[$i]->img;?>" class="gallery image-popup-link text-center" style="background-image: url(<?=$slider_img.$img_cp[$i]->img;?>);">
 							<span><i class="icon-search3"></i></span>
 						</a>
-					<?php endforeach;?>
+					<?php endfor;?><br/>
+					<?php for($i=0; $i<=count($img_produk)-1; $i++):?>
+						<a href="<?=$produk_img?><?=$img_produk[$i]->image;?>" class="gallery image-popup-link text-center" style="background-image: url(<?=$produk_img.$img_produk[$i]->image;?>);">
+							<span><i class="icon-search3"></i></span>
+						</a>
+					<?php endfor;?>
 					</div>
 				</div>
 			</div>

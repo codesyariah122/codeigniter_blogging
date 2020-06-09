@@ -10,14 +10,22 @@
 						<div class="col-one-forth js-fullheight">
 							<div class="display-t js-fullheight">
 								<div class="display-tc js-fullheight">
-									<!--<h2 class="number">01/03</h2>-->
 									<div class="text-inner">
 										<div class="desc">
 											<span class="tag"><?php if($slide1->small == "produk"): echo "ourcitrus | "; else: echo ""; endif;?><?=$slide1->small?> <?php echo $slide1->link != NULL ? "| page" : "";?> </span>
 											<h2><?=ucwords($slide1->header)?></h2>
-											<p style="color:silver;"><?=substr($slide1->truncate, 0, $num_char)?></p>
+											<p style="color:silver;">
+											<?php if(empty($slider1->link)):?>
+													<?=$slide1->truncate?>
+											<?php else:?>
+												<?php if(strlen($slide1->truncate < 300)):?>
+												<?=substr($slide1->truncate, 0, 250);?>
+												<?php else:?>
+												<?=substr($slide1->truncate, 0, 100);?>
+                                            <?php endif; endif;?>
+											</p>
                                             <?php if($slide1->link === "post"):?>
-                                                <a href="<?=base_url().$slide1->link?>" class="btn-view btn-block text-center">View News<i class="icon-arrow-right3"></i></a>
+                                                <a href="<?=base_url().$slide1->link.'/index';?>" class="btn-view btn-block text-center">View News<i class="icon-arrow-right3"></i></a>
                                             <?php endif;?>
 
 											<?php if($slide1->link != NULL && $slide1->link !== "post"):?>

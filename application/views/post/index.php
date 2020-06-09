@@ -52,7 +52,7 @@
                                     <div class="display-t js-fullheight">
                                         <div class="display-tc js-fullheight">
                                             <div class="text-inner text-inner-justify">
-                                                <h2><a href="<?= $k->url ?>"><?= ucwords($k->judul) ?></a></h2>
+                                                <h2><a href="<?=base_url()?>post/read/<?= $k->url ?>"><?= ucwords($k->judul) ?></a></h2>
                                                 <p>
                                                     <!-- manipulasi akan dimulai dari sini -->
                                                     <?= substr($k->content, 0, $num_char = 100); ?><br />

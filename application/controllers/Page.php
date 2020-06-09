@@ -54,12 +54,22 @@ class Page extends CI_Controller {
         $data['uri'] = $this->uri->segment(3);
         // echo $data['uri']; die;
         $data['pagination'] = $this->pagination->create_links();
-
-        $data['meta_index'] = "ourcitrus | website";
-        $data['meta_author'] = "pujiermanto";
-        $data['meta_content'] = "HomePage Ourcitrus by Pt.Gemilang Citrus Berjaya";
-        $data['meta_website_name'] = "OurCitrus By PT. Gemilang Citrus Berjaya";
-        $data['meta_uri'] = $_SERVER['REQUEST_URI'];
+        $link = $this->uri->segment(3);
+        $data['page_index'] = $this->db->query("SELECT * FROM `single_page` WHERE `link` = '$link'")->result();
+        // var_dump($data['page_index']); die;
+        $data['halloffame_index'] = $this->db->query("SELECT * FROM `single_page` WHERE `link` = '$link'")->result();
+        // var_dump($data['halloffame_index']); 
+        // die;
+        $link = $this->uri->segment(3);
+        $data['MainSlide'] = $this->db->query("SELECT * FROM `slide_img` WHERE `link` = '$link'")->result();
+        $data['index_title'] = ucwords($data['MainSlide'][0]->header);
+        $data['og_title'] = "OurCitrus Page | ".$this->uri->segment(3);
+        $data['short_title'] = "OurCitrus Page | ".$this->uri->segment(3);
+        $data['og_description'] = $data['MainSlide'][0]->truncate;
+        $data['og_url'] = "OurCitrus | ".$this->uri->segment(3);        
+        for($i=0; $i<=count($data['page_index'])-1; $i++){
+           $data['og_image'] = base_url('assets/images/page/').$data['page_index'][$i]->img;
+        }
 
 		$this->template->myLayout('page/index', $data);
     }
@@ -93,12 +103,18 @@ class Page extends CI_Controller {
         $data['uri_title'] = str_replace('-',' ', $this->uri->segment(3));
         $where = ['url'=>$data['uri']];
         $data['halloffameread'] = $this->page->halloffame($where);
-        $data['price_list'] = $this->db->query('SELECT * FROM `view_productpage`')->result();
-        $data['meta_index'] = "ourcitrus | website";
-        $data['meta_author'] = "pujiermanto";
-        $data['meta_content'] = "HomePage Ourcitrus by Pt.Gemilang Citrus Berjaya";
-        $data['meta_website_name'] = "OurCitrus By PT. Gemilang Citrus Berjaya";
-        $data['meta_uri'] = $_SERVER['REQUEST_URI'];
+        // var_dump($data['halloffameread']); die;
+
+        $url = $data['uri'];
+        $data['pages'] = $this->db->query("SELECT * FROM `single_page` where `url` = '$url'")->result();
+
+        $data['index_title'] = $data['pages'][0]->judul;
+        $data['og_title'] = "OurCitrus Page | ".$this->uri->segment(3);
+        $data['header_title'] = $data['pages'][0]->judul;
+        $data['short_title'] = $this->uri->segment(3);
+        $data['og_url'] = $data['pages'][0]->judul;
+        $data['og_description'] = $data['pages'][0]->content;
+        $data['og_image'] = base_url('assets/images/page/').$data['pages'][0]->img;
 
         $this->template->myLayout('page/read', $data);
     }

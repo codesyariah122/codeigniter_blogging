@@ -396,7 +396,7 @@ header {
     #colorlib-hero .hero-flex .text-inner {
       display: block;
       width: 100%;
-      margin-left: 0.7em; 
+      margin-left: 0.8em; 
     }
       #colorlib-hero .hero-flex .text-inner h2 {
         font-family: 'Pistilli';
@@ -426,21 +426,24 @@ header {
             padding: 1em;
             background: #fff;
             width: 140%; } }
+        
+        /*garis dibawah small text desc*/
         #colorlib-hero .hero-flex .text-inner .desc:after {
           position: absolute;
           top: 30px;
           bottom: 0;
-          right: 0;
+          right: 100px;
           content: '';
-          width: 200px;
+          width: 250px;
           height: 1px;
-          background: #000; }
+          background: #000; 
+        }
           @media screen and (max-width: 768px) {
             #colorlib-hero .hero-flex .text-inner .desc:after {
               opacity: 0; } }
       #colorlib-hero .hero-flex .text-inner .btn-view {
         font-size: 13px;
-        letter-spacing: 7px;
+        letter-spacing: 10px;
         color: #000;
         text-transform: uppercase;
         border: 1px solid #000;
@@ -590,7 +593,8 @@ header {
 
 .no-gutters {
   padding: 0 !important;
-  margin: 0 !important; }
+  margin: 0 !important; 
+}
 
 .hero-img,
 .about-img,
@@ -631,10 +635,10 @@ header {
     @media screen and (max-width: 768px) {
       .work-entry-flex .text-inner-right {
         text-align: left;
-        margin-left: -4em; } }
+        margin-left: -5em; } }
   .work-entry-flex .text-inner-left {
     text-align: left;
-    margin-left: -4em; }
+    margin-left: -5em; }
   .work-entry-flex .text-inner {
     display: block;
     padding: 3em;

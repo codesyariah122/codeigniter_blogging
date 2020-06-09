@@ -3,7 +3,7 @@
 		<div id="colorlib-work">
 			<div class="container">
 				<div class="row text-center">
-					<h2 class="bold" style="font-size:8em;"><?=$index_title?></h2>
+					<h2 class="bold" style="font-size:5em; margn-top:10rem;"><?=$index_title?></h2>
 				</div>
 				<div class="row">
 					<?php foreach($halloffameread as $v): //echo "<h1>".$v->link."</h1>";?> 
@@ -20,7 +20,7 @@
 									echo 'no-gutters'; 
 									endif;
 									?>">
-										<div class="work-img js-fullheight" style="background-image: url(<?php if($v->image == NULL): echo $img_url."default-avatar.png"; else: echo $hof_img.$v->image; endif;?>);">
+                                        <div class="work-img js-fullheight" style="background-image: url(<?php if(empty($v->image)): echo $img_url."default-avatar.png"; else: echo $v->image ; endif; ?>);">
 										</div>
 									</div>
 								</div>
@@ -38,10 +38,17 @@
 										<div class="display-t js-fullheight">
 											<div class="display-tc js-fullheight">
 												<div class="text-inner text-inner-justify">
-													<h2><?=ucwords($v->nama)?></h2>
+                                                    <h2><?=ucwords($v->nama)?></h2>
+                                                    <h3><?=ucwords($v->kota)?></h3>
+                                                    <hr>
 													<p>
                                                         <b>Peringkat : </b><br/>
                                                         <?=$v->judul?><br/>
+                                                        <br/><br/>
+                                                        <a href="whatsapp://send?text=<?=base_url()?>post/read/<?=$v->url?>/" class="btn btn-success" data-action="share/whatsapp/share">Share to Whatsapp</a>
+                                                        <br/><br/>
+                                                        <?=$reaction?>
+                                                        <br/>
                                                     </p>
 												</div>
 											</div>

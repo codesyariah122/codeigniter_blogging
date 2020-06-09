@@ -1,11 +1,11 @@
 <div id="colorlib-work">
 			<div class="container">
 				<div class="row text-center" >
-					<h5 class="bold"><?=$index_title?></h5>
+					<h5 class="bold" style="font-site:3em; margin-top:0.3em;"><?=$index_title?></h5>
 				</div>
 				<div class="row">
 					<div class="col" style="margin-top:7em; margin-bottom:-5em;">
-            			<?= $pagination ?>
+                        <?= $pagination ?>
         			</div>					
 			<?php foreach($produk as $k):?> 
 					<?php if($k->tipe): ?>
@@ -48,11 +48,11 @@
 										<div class="display-t js-fullheight">
 											<div class="display-tc js-fullheight">
 												<div class="text-inner text-inner-justify">
-													<h2><a href="<?=base_url()?>produk/read/<?=$k->link?>"><?=$k->nama?></a></h2>
+													<h2><a href="<?=base_url()?>produk/read/<?=$k->tipe?>/<?=$k->link?>"><?=$k->nama?></a></h2>
 													<p>
 														<?=substr($k->deskripsi, 0, $num_char)?>...<br/>
 													</p>
-													<a href="<?=base_url()?>produk/read/<?=strtolower($k->link)?>" class="btn-view btn-block text-center">View Product</a><br/><br/>
+													<a href="<?=base_url()?>produk/read/<?=$k->tipe?>/<?=strtolower($k->link)?>" class="btn-view btn-block text-center">View Product</a><br/><br/>
 												</div>
 											</div>
 										</div>

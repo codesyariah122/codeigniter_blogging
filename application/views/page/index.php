@@ -1,7 +1,7 @@
 <div id="colorlib-work">
     <div class="container">
         <div class="row text-center">
-        <h5 class="bold" style="font-size:8em; margin-top:5rem;"><?=$index_title?></h5>
+        <h3 class="bold" style="font-size:7em; margin-top:10rem;"><?=$index_title?></h3>
         </div>
         <div class="row">
         <div class="col">
@@ -34,7 +34,11 @@
                                             ?>
                                             );">
                                     <?php if($k->url === "office"): ?>
-                                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d253193.07575233828!2d112.55525991640626!3d-7.4495591000000045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7e140ece8a251%3A0x86e9782da383abc2!2sPT%20Gemilang%20Citrus%20Berjaya!5e0!3m2!1sid!2sid!4v1591139409201!5m2!1sid!2sid" width="600" height="550" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                                    <?=$office_map?>
+                                    <br/><br/>
+                                    <a href="whatsapp://send?text=<?=base_url()?>page/index/<?=$k->url?>/" class="btn btn-success" data-action="share/whatsapp/share">Share to Whatsapp</a>
+                                    <br/><br/>
+                                    <?=$reaction?>
                                     <?php endif;?>
                                     </div>
                                 </div>
@@ -53,7 +57,7 @@
                                     <div class="display-t js-fullheight">
                                         <div class="display-tc js-fullheight">
                                             <div class="text-inner text-inner-justify">
-                                                <h2 style="color:silver !important;"><a href="<?= $k->link ?>"><?= ucwords($k->judul); ?></a></h2>
+                                                <h2 style="color:silver !important;"><a href="<?= base_url() ?>page/read/<?= $k->url ?>"><?= ucwords($k->judul); ?></a></h2>
                                                 <?php if($uri === "office"):?>
                                                 <h3>
                                                 <?php endif;?>
@@ -63,6 +67,10 @@
                                                         <?= substr($k->content, 0, $num_char = 100); ?><br />
                                                     <?php elseif($uri === "customerservice"):?>
                                                         <?=$k->content?>
+                                                        <br/><br/>
+                                                        <a href="whatsapp://send?text=<?=base_url()?>page/index/<?=$k->url?>/" class="btn btn-success" data-action="share/whatsapp/share">Share to Whatsapp</a>
+                                                        <br/><br/>
+                                                        <?=$reaction?>
                                                     <?php endif;?>
                                                     <?php if($uri === "office"):?>
                                                     </h4>

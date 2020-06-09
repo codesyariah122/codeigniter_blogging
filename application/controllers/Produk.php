@@ -6,11 +6,7 @@ class Produk extends CI_Controller {
     public function index()
     {
         $uri = $this->uri->segment(3);
-        //echo $uri;
         $data['login'] = $this->session->userdata('email');
-        $title = $this->db->query("SELECT * FROM `produk_testing` WHERE `tipe` = '$uri'")->row_array();
-        //var_dump($title);die;
-        $data['index_title'] = "Ourcitrus ".$title['tipe'];
         $config['base_url'] = base_url('produk/index/'.$uri); //site url
         $config['total_rows'] = $this->M_Data->countAllproduk(); //total row
         //echo $config['total_rows'];die;
@@ -44,29 +40,81 @@ class Produk extends CI_Controller {
         $data['produk'] = $this->M_Data->allproduct($config["per_page"], $data['page']);           
         //var_dump($data['produk']);die;
         $data['pagination'] = $this->pagination->create_links();
-        $data['meta_index'] = "ourcitrus | website";
-        $data['meta_author'] = "pujiermanto";
-        $data['meta_content'] = "HomePage Ourcitrus by Pt.Gemilang Citrus Berjaya";
-        $data['meta_website_name'] = "OurCitrus By PT. Gemilang Citrus Berjaya";
-        $data['meta_uri'] = $_SERVER['REQUEST_URI'];
+        
+        $data['produk_img'] = base_url('assets/images/produk/');
+        $tipe = $this->uri->segment(3);
+        $data['produk_image'] = $this->db->query("SELECT * FROM `produk_testing` WHERE `tipe` = '$tipe'")->result();
+        // var_dump($data['image']);
+        // echo "<br/><br/><br/>"; 
+        // die;
+
+        $data['MainSlide'] = $this->db->query("SELECT * FROM `slide_img` WHERE `small` = 'products'")->result();
+        $data['index_title'] = ucwords($this->uri->segment(3));
+        $data['short_title'] = "OurCitrus | ".$this->uri->segment(3);
+        $data['og_title'] = $data['MainSlide'][0]->truncate;
+        $data['og_url'] = base_url().$this->uri->segment(1).'/'.$this->uri->segment(2).'/'.$data['produk_image'][0]->tipe.'/';
+        $data['og_description'] = $data['MainSlide'][0]->truncate;;
+        for($i=0; $i<=count($data['produk_image'])-1; $i++){
+            $data['og_image'] = base_url('assets/images/produk/').$data['produk_image'][$i]->image;
+        }
+               
+
         $this->template->myLayout('produk/index', $data);
         
     }
 
     public function read()
     {
-        $data['meta_index'] = "ourcitrus | website";
-        $data['meta_author'] = "pujiermanto";
-        $data['meta_content'] = "HomePage Ourcitrus by Pt.Gemilang Citrus Berjaya";
-        $data['meta_website_name'] = "OurCitrus By PT. Gemilang Citrus Berjaya";
-        $data['meta_uri'] = $_SERVER['REQUEST_URI'];
-        $data['link'] = $this->uri->segment(3);
-        $data['user'] = $this->db->get_where('user', ['email'=>$this->session->userdata('email')])->row_array();
-        $data['index_title'] = $data['link'];
-        $link = $data['link'];
-        $data['allproduk'] = $this->db->query("SELECT * FROM `produk_testing` WHERE `link` = '$link'")->result();
-        $this->template->myLayout('produk/read', $data);
+        $data['produk_img'] = base_url('assets/images/produk/');
+        $link = $this->uri->segment(4);
+        // echo $id; die;
+        $data['image'] = $this->db->query("SELECT * FROM `produk_testing` WHERE `link` = '$link'")->result();
+        // var_dump($data['image']);
+        // echo $data['image'][0]->nama;
+        // echo "<br/><br/><br/>"; 
+        // die;
 
+        $data['link'] = $this->uri->segment(4);
+        $data['user'] = $this->db->get_where('user', ['email'=>$this->session->userdata('email')])->row_array();
+        $link = $data['link'];
+        $data['allproduk'] = $this->db->query("SELECT * FROM `produk_testing` WHERE `link` = '$link' ORDER BY `id` DESC LIMIT 1")->result();
+        $data['allproduk_eng'] = $this->db->query("SELECT * FROM `produk_eng` WHERE `link` = '$link' ORDER BY `id` DESC LIMIT 1")->result();
+        
+        $id =  $data['allproduk'][0]->id; 
+        // echo $id; die;
+        if($this->uri->segment(4) !== "new-ourcitrus-bea-ultimate-first-sight-lipcream-series"):
+        $data['produk_eng_sebelumnya'] = $this->db->query("SELECT * FROM `produk_eng` WHERE `id` = $id-1")->result();
+        $data['produk_bahasa_sebelumnya'] = $this->db->query("SELECT * FROM `produk_testing` WHERE `id` = $id-1")->result();
+        else:
+        $data['produk_bahasa_sebelumnya'] = $this->db->query("SELECT * FROM `produk_testing` WHERE `id` = $id")->result();
+        $data['produk_eng_sebelumnya'] = $this->db->query("SELECT * FROM `produk_eng` WHERE `id` = $id")->result();
+        endif;
+        
+        if($this->uri->segment(4) !== "ourcitrus-premium-nutrimax-gcs-minuman-serbuk-rasa-anggur"):
+        $data['produk_bahasa_selanjutnya'] = $this->db->query("SELECT * FROM `produk_testing` WHERE `id` = $id+1")->result();
+        $data['produk_eng_selanjutnya'] = $this->db->query("SELECT * FROM `produk_testing` WHERE `id` = $id+1")->result();
+        else:
+        $data['produk_bahasa_selanjutnya'] = $this->db->query("SELECT * FROM `produk_testing` WHERE `id` = $id")->result();
+        $data['produk_eng_selanjutnya'] = $this->db->query("SELECT * FROM `produk_testing` WHERE `id` = $id")->result();
+        endif;
+
+        $data['link_sebelumnya'] = $data['produk_bahasa_sebelumnya'][0]->link;
+        $data['link_selanjutnya'] = $data['produk_bahasa_selanjutnya'][0]->link;
+        $data['link_previous'] = $data['produk_eng_sebelumnya'][0]->link;
+        $data['link_next'] = $data['produk_eng_selanjutnya'][0]->link;
+        // var_dump($data['produk_selanjutnya']);
+        // echo "<br/><br/>";
+        // echo $data['produk_selanjutnya'][0]->link;
+        // die;
+        $data['index_title'] = $data['allproduk'][0]->nama;
+        $data['og_title'] = $data['allproduk'][0]->deskripsi;
+        $data['header_title'] = $data['allproduk'][0]->nama;
+        $data['short_title'] = $data['allproduk'][0]->nama;
+        $data['og_url'] = base_url().$this->uri->segment(1).'/'.$this->uri->segment(2).'/'.$this->uri->segment(3).'/'.$this->uri->segment(4);
+        $data['og_description'] = $data['allproduk'][0]->deskripsi;
+        $data['og_image'] = base_url('assets/images/produk/').$data['allproduk'][0]->image;
+
+        $this->template->myLayout('produk/read', $data);
     }
 
     public function nutrisi()
