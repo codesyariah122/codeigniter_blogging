@@ -4,4 +4,3 @@ PC-multimedia(pujipc): 1 746 017 372
 
 
 
-password(sama) : maunyaapa
