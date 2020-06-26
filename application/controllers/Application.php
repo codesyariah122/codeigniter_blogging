@@ -15,8 +15,15 @@ class Application extends CI_Controller {
             $this->form_validation->set_rules('phone', 'Phone', 'required|min_length[13]');
             $this->form_validation->set_rules('message', 'Message', 'required');
             if($this->form_validation->run() === false){
-                $data['index_title'] = "Buku Tamu Ourcitrus";
-                $data['header_title'] = "Bukut Tamu";
+                $data['MainSlide'] = $this->M_Data->MainSlide()->result();
+                $data['index_title'] = "Buku Tamu";
+                $data['og_url'] = base_url().$this->uri->segment(1).'/'.$this->uri->segment(2).'/'.$this->uri->segment(3).'/';
+                for($i=0; $i<=count($data['MainSlide'])-1; $i++):
+                $data['og_description'] = $data['MainSlide'][$i]->header;
+                $data['og_image'] = base_url('assets/images/sliders/').$data['MainSlide'][$i]->img;
+                $data['short_title'] = $data['MainSlide'][$i]->header;
+                endfor;
+                $data['header_title'] = "Buku Tamu";
                 $this->session->set_flashdata('error', '<div class="alert alert-danger" role="alert">isi form buku tamu dengan benar</div>');
                 $this->template->myLayout('bukutamu', $data);
             }else{

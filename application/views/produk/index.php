@@ -30,8 +30,8 @@
 											echo $produk_img.$k->image;
 											endif;
 											?>
-											);">
-										</div>
+											);" id='myImg' alt="<?=$k->nama?>">
+                                        </div>
 									</div>
 								</div>
 							</div>
@@ -61,6 +61,13 @@
 							</div>
 						</div>
 					</div>
+
+						<!-- The Modal -->
+						<div id="myModal" class="modal">
+						<span class="close">&times;</span>
+						<img class="modal-content" id="img-<?=$k->id?>">
+						<div id="caption"></div>
+						</div>
 
 				<?php endif; endforeach;?>
 				

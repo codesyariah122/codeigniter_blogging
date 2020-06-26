@@ -50,9 +50,9 @@ class M_Data extends CI_Model {
 	public function search($keyword)
 	{
 		$this->db->select('*');
-		$this->db->from('produk_data');
+		$this->db->from('produk_testing');
 		$this->db->like('nama', $keyword);
-		$this->db->like('key_search', $keyword);
+		//$this->db->like('key_search', $keyword);
         $this->db->or_like('tipe', $keyword);
 		return $this->db->get()->result(); 
     }

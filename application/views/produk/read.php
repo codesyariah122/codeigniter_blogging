@@ -13,8 +13,8 @@
     <?php foreach($allproduk_eng as $k):?>
 <div class="container" style="margin-top:10em;">
 	<div class="work-single-flex js-fullheight">
-    <a href="<?php if($k->image == NULL): echo $page_img."slider3.jpg"; else: echo $produk_img.$k->image; endif;?>" class="col-half js-full-height work-img gallery image-popup-link" style="background-image: url(<?php if($k->image == NULL): echo $page_img."slider3.jpg"; else: echo $produk_img.$k->image; endif;?>)";>
-			</a>
+    <a href="<?php if($k->image == NULL): echo $page_img.'slider3.jpg'; else: echo $produk_img.$k->image; endif;?>" class="col-half js-full-height work-img gallery image-popup-link" style="background-image: url(<?php if($k->image == NULL): echo $page_img.'slider3.jpg'; else: echo $produk_img.$k->image; endif;?>);">
+	</a>
 			<div class="col-half js-fullheight">
 				<div class="display-t js-fullheight">
 					<div class="display-tc js-fullheight">

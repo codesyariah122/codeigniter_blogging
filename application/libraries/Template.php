@@ -46,7 +46,7 @@ class Template {
 						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-
+                                
         $data['img_cp'] = $this->_ci->db->query("SELECT * FROM `slide_img`")->result();
         // var_dump($data['img_cp']); 
         // for($i=0; $i<=count($data['img_cp'])-1; $i++):

@@ -80,16 +80,84 @@ class Layout_model extends CI_Model {
         return $this->db->get('halloffame')->result();
     }
 
+    public function addpage()
+    {
+        $judul = htmlspecialchars(strip_tags($this->input->post('judul')));
+        $url = $this->input->post('url');
+        $image = 'business.png';
+        $link = $this->input->post('link');
+        $link_tujuan = $this->input->post('link_tujuan');
+        $content = $this->input->post('content');
+
+        $new_image = $_FILES['image']['name'];
+        if($new_image){
+            $config['allowed_types'] = 'gif|jpg|jpeg|png|pdf';
+            $config['max_size'] = '10048';
+            $config['upload_path'] = './assets/images/page/';
+            $this->load->library('upload', $config);
+
+            if($this->upload->do_upload('image')){
+                if($image !== 'business.png'){
+                    unlink(FCPATH.'./assets/images/page/'.$image);
+                    $image = "business.png";
+                }
+                $image = $this->upload->data('file_name');
+            }else{
+                echo $this->upload->display_errors();
+            }
+        }
+
+        $data = [
+            'judul' => $judul,
+            'url' => $url,
+            'img' => $image,
+            'link' => $link,
+            'link_tujuan' => $link_tujuan,
+            'content' => $content
+        ];
+        // var_dump($data); die;
+        return $this->db->insert('single_page', $data);
+    }
+
     public function editpage($table, $where)
     {
         return $this->db->get_where($table, $where)->result();
     }
+
+    public function edithalloffame($table, $where)
+    {
+        return $this->db->get_where($table, $where)->result();
+    }
+
+    public function updatehalloffame($where, $data, $table)
+	{
+		$this->db->where($where);
+		$this->db->set($data);
+		$this->db->update($table);
+	}
 
     public function updatepage($where, $data, $table)
 	{
 		$this->db->where($where);
 		$this->db->set($data);
 		$this->db->update($table);
-	}
+    }
+
+    public function deletepage($where, $table)
+    {
+        $this->db->where($where);
+        $this->db->delete($table);
+    }
+    
+    public function get_CURL($url)
+    {
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+        $result = curl_exec($curl);
+        curl_close($curl);
+
+        return json_decode($result, TRUE);
+    }
 
 }

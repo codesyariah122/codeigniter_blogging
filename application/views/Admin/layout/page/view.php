@@ -28,13 +28,13 @@
                   <?php $no=1; foreach($page as $p):?>
                     <tr>
                       <td><?=$no?></td>
-                      <td width="230">
-                      <a href="<?=$p->url?>" class="mb-5 btn badge badge-pill badge-success"><i class="fas fa-fw fa-eye"></i> View</a> &nbsp; <a href="editpage/<?=$p->id?>" class="mb-5 btn badge badge-pill badge-primary"><i class="fas fa-fw fa-edit"></i> Edit </a> &nbsp; <a href="" class="badge badge-pill badge-danger"><i class="fas fa-fw fa-trash-alt"></i> Delete</a>
+                      <td width="500">
+                      <a href="<?=$p->url?>" class="mb-5 btn badge badge-pill badge-success"><i class="fas fa-fw fa-eye"></i> View</a> &nbsp; <a href="<?=base_url()?>Layout/edithalloffame/<?=$p->id?>" class="mb-5 btn badge badge-pill badge-primary"><i class="fas fa-fw fa-edit"></i> Edit </a> &nbsp; <a href="" class="badge badge-pill badge-danger"><i class="fas fa-fw fa-trash-alt"></i> Delete</a>
                       </td>
                       <td><?=$p->judul?></td>
                       <td><?=$p->nama?></td>
                       <td><?=$p->username?></td>
-                      <td><img src="<?=base_url()?>assets/images/<?=$link_image?>/<?=($p->image == NULL) ? 'default.jpg' : $p->image; ?>" width="300" height="200"></td>
+                      <td><img src="<?=base_url()?>assets/images/<?=$link_image?>/<?=($p->image == NULL) ? 'default-avatar.png' : $p->image; ?>" width="300" height="300"></td>
                       <td><?=$p->kota?></td>
                       <td><?=$p->negara?></td>
                       <td><?=$p->totalincome?></td>

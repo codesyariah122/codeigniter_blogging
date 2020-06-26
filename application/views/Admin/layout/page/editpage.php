@@ -11,6 +11,10 @@
                         <label for="exampleFormControlInput1">Judul</label>
                         <input type="text" class="form-control" id="exampleFormControlInput1" name="judul" value="<?=$e->judul?>">
                     </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Url</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="url" value="<?=$e->url?>">
+                    </div>
                     <div class="row mb-5 mt-4">
                                     <div class="col-sm-3">
                                         <img src="<?=base_url()?>assets/images/page/<?=$e->img?>" class="img-thumbnail">
@@ -30,7 +34,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Conten</label>
+                        <label for="exampleFormControlTextarea1">Content</label>
                         <textarea name="content" class="form-control ckeditor" id="exampleFormControlTextarea1" rows="3">
                         <?=$e->content?>
                         </textarea>

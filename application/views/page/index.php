@@ -9,7 +9,8 @@
         </div>
             <?php foreach ($page as $k) : //echo "<h1>".$k->link."</h1>";
             ?>
-                <?php $content = strlen($k->content); //echo "<h1>".$content."</h1>";1
+                <?php $content = strlen($k->content); 
+                // echo "<h1>".$content."</h1>";
                 ?>
                 <div class="col-md-12">
                     <div class="work-entry-flex animate-box js-fullheight">
@@ -24,15 +25,7 @@
                                         echo 'no-gutters';
                                     endif;
                                     ?>">
-                                    <div class="work-img js-fullheight" style="background-image: url(
-											<?php
-                                            if ($k->img == NULL AND $k->url !== "office") :
-                                                echo base_url("assets/images/page/slider6.jpg");
-                                            else :
-                                                echo $page_img . $k->img;
-                                            endif;
-                                            ?>
-                                            );">
+                                    <div class="work-img js-fullheight" style="background-image: url(<?php if($k->img === "business.png" AND $k->judul === "Social Media Links"): echo $youtube_profile_pic; endif; if ($k->img == NULL AND $k->url !== "office" AND $k->img !== "business.png" AND $k->judul !== "Social Media Links"): echo base_url("assets/images/page/slider6.jpg"); elseif($k->img !== "business.png") : echo $page_img . $k->img; endif; ?>);">
                                     <?php if($k->url === "office"): ?>
                                     <?=$office_map?>
                                     <br/><br/>
@@ -40,6 +33,7 @@
                                     <br/><br/>
                                     <?=$reaction?>
                                     <?php endif;?>
+
                                     </div>
                                 </div>
                             </div>
@@ -76,8 +70,9 @@
                                                     </h4>
                                                     <?php endif;?>
                                                 </p>
+
                                                 <p id="p1">
-                                                    <?php if($k->content >! $num_char AND $k->judul !== "Legality And Business Plan" AND $uri !== "customerservice" AND $uri !== "office"):?>
+                                                    <?php if($k->content >! $num_char AND $k->judul !== "Legality And Business Plan" AND $uri !== "customerservice" AND $uri !== "office" AND $k->judul !== "Social Media Links"):?>
                                                     <a href="<?= base_url() ?>page/read/<?= $k->url ?>" class="btn-view btn-block text-center">Read More</a>
                                                     <?php endif;?>
                                                     <?php if($k->judul === "Legality And Business Plan"): ?>

@@ -1,4 +1,3 @@
-<?php if($halloffameview['url'] !== $uri){?>
 <?php foreach($viewpage as $v): ?>
 		<div class="container">
 				<div class="row text-center">
@@ -7,21 +6,20 @@
 	<div class="work-single-flex js-fullheight" style="margin-top:10em;">
         <?php if($uri !== "price-list" AND $uri !== "Legality-And-Business-Plan"):?>
 			<a href="<?php
-				if($v->img == NULL): echo $img_url."default-avatar.png"; else: echo $page_img.$v->img; endif;  ?>" class="col-half js-full-height work-img gallery image-popup-link" style="background-image: url(<?php
-				if($v->img == NULL): echo $img_url."default-avatar.png"; else: echo $page_img.$v->img; endif;  ?>);" style="z-index: -1;">
+				if($v->img !== "business.png" AND $v->img == NULL AND $v->judul !== "Social Media Links"): echo $img_url."default-avatar.png"; elseif($v->img === "business.png" AND $v->judul === "Social Media Links"): echo $youtube_profile_pic; else: echo $page_img.$v->img; endif;  ?>" class="col-half js-full-height work-img gallery image-popup-link" style="background-image: url(<?php if($v->img === "business.png" AND $v->judul === "Social Media Links"): echo $youtube_profile_pic; endif; if ($v->img == NULL AND $v->url !== "office" AND $v->img !== "business.png" AND $v->judul !== "Social Media Links"): echo base_url("assets/images/page/slider6.jpg"); elseif($v->img !== "business.png") : echo $page_img . $v->img; endif; ?>);" style="z-index: -1;">
             </a>
 			<div class="col-half js-fullheight">
 				<div class="display-t js-fullheight">
 					<div class="display-tc js-fullheight">
 						<div class="work-desc">
-							<h2 style="margin-top:-3em;"><?=ucwords($v->judul)?></h2>
+                            <h2 style="margin-top:-3em;"><?=ucwords($v->judul)?></h2>
+
 							<p>
 								<?=$v->content?><br/>
 							</p>
 							<p>
                                 <a href="<?=base_url()?>page/index/<?=$v->link?>" class="btn-preview">Kembali</a>
                             </p>
-                            
 						</div>
 					</div>
 				</div>
@@ -53,5 +51,3 @@
 </div>
 
 <?php endforeach;?>
-
-<?php } else { 	$this->view('page/halloffameread'); }?>

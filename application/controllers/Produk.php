@@ -57,7 +57,6 @@ class Produk extends CI_Controller {
         for($i=0; $i<=count($data['produk_image'])-1; $i++){
             $data['og_image'] = base_url('assets/images/produk/').$data['produk_image'][$i]->image;
         }
-               
 
         $this->template->myLayout('produk/index', $data);
         

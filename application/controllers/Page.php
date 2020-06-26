@@ -70,7 +70,18 @@ class Page extends CI_Controller {
         for($i=0; $i<=count($data['page_index'])-1; $i++){
            $data['og_image'] = base_url('assets/images/page/').$data['page_index'][$i]->img;
         }
+        //youtube api
+        // $url = "https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=UC1t1vRGxruecjfUb2V5c6Pg&key=AIzaSyBzEfs83S6IeHMIt1AoiV5J5ueJjcx1eSw";
+        // $data['social_data'] = $this->page->get_CURL($url);
+        // // var_dump($data['social_data']); die;
+        // $data['youtube_channel_id'] = $data['social_data']['items'][0]['id'];
+        // $data['youtube_profile_pic'] = $data['social_data']['items'][0]['snippet']['thumbnails']['high']['url'];
+        // $data['youtube_channel_name'] = $data['social_data']['items'][0]['snippet']['title'];
+        // $data['subscriber'] = $data['social_data']['items'][0]['statistics']['subscriberCount'];
 
+        // $latestVideo = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyBzEfs83S6IeHMIt1AoiV5J5ueJjcx1eSw&channelId=UC1t1vRGxruecjfUb2V5c6Pg&maxResults=1&order=date&part=snippet";
+        // $data['latestVideo'] = $this->page->get_CURL($latestVideo);
+        // $data['latestVideo'] = $data['latestVideo']['items'][0]['id']['videoId'];
 		$this->template->myLayout('page/index', $data);
     }
 
@@ -101,10 +112,10 @@ class Page extends CI_Controller {
         $data['viewpage'] = $this->page->viewpage('single_page');
         $data['kantor'] = $this->db->get_where('single_page', ['url' => 'Kantor-OurCitrus']);
         $data['uri_title'] = str_replace('-',' ', $this->uri->segment(3));
+        
         $where = ['url'=>$data['uri']];
         $data['halloffameread'] = $this->page->halloffame($where);
         // var_dump($data['halloffameread']); die;
-
         $url = $data['uri'];
         $data['pages'] = $this->db->query("SELECT * FROM `single_page` where `url` = '$url'")->result();
 
@@ -116,7 +127,57 @@ class Page extends CI_Controller {
         $data['og_description'] = $data['pages'][0]->content;
         $data['og_image'] = base_url('assets/images/page/').$data['pages'][0]->img;
 
-        $this->template->myLayout('page/read', $data);
+        //youtube api
+        // $url = "https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=UC1t1vRGxruecjfUb2V5c6Pg&key=AIzaSyBzEfs83S6IeHMIt1AoiV5J5ueJjcx1eSw";
+        // $data['social_data'] = $this->page->get_CURL($url);
+        // // var_dump($data['social_data']); die;
+        // $data['youtube_channel_id'] = $data['social_data']['items'][0]['id'];
+        // $data['youtube_profile_pic'] = $data['social_data']['items'][0]['snippet']['thumbnails']['high']['url'];
+        // $data['youtube_channel_name'] = $data['social_data']['items'][0]['snippet']['title'];
+        // $data['subscriber'] = $data['social_data']['items'][0]['statistics']['subscriberCount'];
+
+        // $latestVideo = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyBzEfs83S6IeHMIt1AoiV5J5ueJjcx1eSw&channelId=UC1t1vRGxruecjfUb2V5c6Pg&maxResults=1&order=date&part=snippet";
+        // $data['latestVideo'] = $this->page->get_CURL($latestVideo);
+        // $data['latestVideo'] = $data['latestVideo']['items'][0]['id']['videoId'];
+        // echo $data['uri']."<br/><br/>".$data['halloffameview']['url']; die;
+        if($data['halloffameview']['url'] !== $data['uri']):
+            $this->template->myLayout('page/read', $data);
+        else:
+            switch($this->input->post('reaction')){
+                case 'love':
+                    // var_dump($this->input->post()); die;  
+                    $nama = $this->input->post('nama');
+                    $love = $this->input->post('reaction');
+                    $query = "UPDATE `halloffame` SET `love` = `$love`+1 WHERE nama = '$nama'";
+                    $this->db->query($query);
+                break;
+                case 'like':
+                    $nama = $this->input->post('nama');
+                    $like = $this->input->post('reaction');
+                    $query = "UPDATE `halloffame` SET `like` = `$like`+1 WHERE nama = '$nama'";
+                    $this->db->query($query);
+                break;
+                case 'clapping':
+                    $nama = $this->input->post('nama');
+                    $clapping = $this->input->post('reaction');
+                    $query = "UPDATE `halloffame` SET `clapping` = `$clapping`+1 WHERE nama = '$nama'";
+                    $this->db->query($query);
+                break;
+                case 'biceps':
+                    $nama = $this->input->post('nama');
+                    $biceps = $this->input->post('reaction');
+                    $query = "UPDATE `halloffame` SET `biceps` = `$biceps`+1 WHERE nama = '$nama'";
+                    $this->db->query($query);
+                break;
+                case 'fire':
+                    $nama = $this->input->post('nama');
+                    $fire = $this->input->post('reaction');
+                    $query = "UPDATE `halloffame` SET `fire` = `$fire`+1 WHERE nama = '$nama'";
+                    return $this->db->query($query);
+                break;
+            }
+            $this->template->myLayout('page/halloffameread', $data);
+        endif;
     }
 
 

@@ -26,14 +26,9 @@
         <?php endfor;?>
     <?php elseif($_SERVER['REQUEST_URI'] === "/main/index/home"):?>
         <?php for($i=0; $i<=count($MainSlide)-1; $i++): ?>
-            <meta name="description" content="<?=$MainSlide[$i]->truncate?>">
-            <meta property="og:title" content="<?=$MainSlide[$i]->header?>">
-            <meta property="og:url" content="<?=$MainSlide[$i]->link?>" />
-            <meta property="og:description" content="<?=$MainSlide[$i]->truncate?>">
-            <meta property="og:image" content="<?=$slider_img?><?=$MainSlide[$i]->img?>">
-            <div id='hidden' style='display:none;'><img src="<?=$slider_img?><?=$MainSlide[$i]->img?>"></div>
-            <meta property="og:image" itemprop="image" content="<?=$slider_img?><?=$MainSlide[$i]->img?>">
-            <meta property="og:image:url" itemprop="image" content="<?=$slider_img?><?=$MainSlide[$i]->img?>">
+        <meta property="og:description" content="<?=substr($MainSlide[$i]->truncate, 0, 150)?>" />
+        <meta property="og:image" content="<?=$slider_img?><?=$MainSlide[$i]->img?>" />
+        <div id='hidden' style='display:none;'><img src="<?=$slider_img?><?=$MainSlide[$i]->img?>"></div>
         <?php endfor;?>
     <?php elseif($_SERVER['REQUEST_URI'] === "/main/home" OR $_SERVER['REQUEST_URI'] === "/main/home/"):?>
         <?php for($i=0; $i<=count($MainSlide)-1; $i++): ?>
@@ -207,7 +202,8 @@
 	<!--[if lt IE 9]>
 	<script src="<?=base_url()?>assets/js/respond.min.js"></script>
 	<![endif]-->
-	<!-- Include Font Awesome Stylesheet in Header -->
+    <!-- Include Font Awesome Stylesheet in Header -->
+    <link href="//db.onlinewebfonts.com/c/4a5910f3106719968c759303c3d579c2?family=Kuenstler+Script" rel="stylesheet" type="text/css"/> 
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet"> 
@@ -221,14 +217,17 @@
       margin: 20px 0;
     }
     /* Hide AddToAny vertical share bar when screen is less than 980 pixels wide */
-@media screen and (max-width: 980px) {
-    .a2a_floating_style.a2a_vertical_style { display: none; }
-}
+    @media screen and (max-width: 980px) {
+        .a2a_floating_style.a2a_vertical_style { display: none; }
+    }
+    /*emoji*/
+
     </style>
         <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css"> -->
         <script type="text/javascript" src="<?=base_url()?>assets/sweet/sweetalert2.all.min.js"></script>
 <?=$add_this_js?>
 <?=$image_share?>
+
 	</head>
 
 	<body>
