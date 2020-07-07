@@ -1,6 +1,7 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-class Layout_model extends CI_Model {
+defined('BASEPATH') or exit('No direct script access allowed');
+class Layout_model extends CI_Model
+{
 
     public function SliderLayout()
     {
@@ -13,7 +14,8 @@ class Layout_model extends CI_Model {
         return $this->db->get_where('slide_img', $where)->result();
     }
 
-    public function updateslider($where, $data){
+    public function updateslider($where, $data)
+    {
         $this->db->where($where);
         $this->db->set($data);
         $this->db->update('slide_img');
@@ -28,13 +30,13 @@ class Layout_model extends CI_Model {
 
     public function countAllpost()
     {
-        $query = $this->db->get_where('info_terbaru', ['author'=>$this->session->userdata('name')])->result();
+        $query = $this->db->get_where('info_terbaru', ['author' => $this->session->userdata('name')])->result();
         //var_dump($query);die;
-        if($query != NULL ):
-        $author = $query[0]->author;
-        $total = $this->db->get_where('info_terbaru', ['author' => $author])->num_rows();
-        return $total;
-        else:
+        if ($query != NULL) :
+            $author = $query[0]->author;
+            $total = $this->db->get_where('info_terbaru', ['author' => $author])->num_rows();
+            return $total;
+        else :
             $this->session->set_flashdata('message', '<div class="alert alert-primary" role="alert"> Belum ada postingan </div>');
         endif;
     }
@@ -90,19 +92,19 @@ class Layout_model extends CI_Model {
         $content = $this->input->post('content');
 
         $new_image = $_FILES['image']['name'];
-        if($new_image){
+        if ($new_image) {
             $config['allowed_types'] = 'gif|jpg|jpeg|png|pdf';
             $config['max_size'] = '10048';
             $config['upload_path'] = './assets/images/page/';
             $this->load->library('upload', $config);
 
-            if($this->upload->do_upload('image')){
-                if($image !== 'business.png'){
-                    unlink(FCPATH.'./assets/images/page/'.$image);
+            if ($this->upload->do_upload('image')) {
+                if ($image !== 'business.png') {
+                    unlink(FCPATH . './assets/images/page/' . $image);
                     $image = "business.png";
                 }
                 $image = $this->upload->data('file_name');
-            }else{
+            } else {
                 echo $this->upload->display_errors();
             }
         }
@@ -130,17 +132,17 @@ class Layout_model extends CI_Model {
     }
 
     public function updatehalloffame($where, $data, $table)
-	{
-		$this->db->where($where);
-		$this->db->set($data);
-		$this->db->update($table);
-	}
+    {
+        $this->db->where($where);
+        $this->db->set($data);
+        $this->db->update($table);
+    }
 
     public function updatepage($where, $data, $table)
-	{
-		$this->db->where($where);
-		$this->db->set($data);
-		$this->db->update($table);
+    {
+        $this->db->where($where);
+        $this->db->set($data);
+        $this->db->update($table);
     }
 
     public function deletepage($where, $table)
@@ -148,7 +150,7 @@ class Layout_model extends CI_Model {
         $this->db->where($where);
         $this->db->delete($table);
     }
-    
+
     public function get_CURL($url)
     {
         $curl = curl_init();
@@ -160,4 +162,10 @@ class Layout_model extends CI_Model {
         return json_decode($result, TRUE);
     }
 
+    public function reaction($where, $data, $table)
+    {
+        $this->db->where($where);
+        $this->db->set($data, $data + 1, false);
+        return $this->db->update($table);
+    }
 }

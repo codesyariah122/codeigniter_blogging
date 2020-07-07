@@ -4,9 +4,10 @@
 //belum ada database nya 
 //12-03-2018 / Kamis 08:17
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Page extends CI_Controller {
+class Page extends CI_Controller
+{
 
     public function __construct()
     {
@@ -18,8 +19,8 @@ class Page extends CI_Controller {
     {
         $data['login'] = $this->session->userdata('email');
         $link = $this->uri->segment(3);
-        $data['index_title'] = "Ourcitrus ".$link;
-        $config['base_url'] = base_url('page/index/'.$link); //site url
+        $data['index_title'] = "Ourcitrus " . $link;
+        $config['base_url'] = base_url('page/index/' . $link); //site url
         $config['total_rows'] = $this->page->countAllpage(); //total row
         $config['per_page'] = 3;  //show record per halaman
         $config["uri_segment"] = 4;  // uri parameter
@@ -43,13 +44,13 @@ class Page extends CI_Controller {
         $config['first_tagl_close'] = '</span></li>';
         $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
         $config['last_tagl_close']  = '</span></li>';
- 
+
         $this->pagination->initialize($config);
         $data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
- 
+
         //panggil function get_mahasiswa_list yang ada pada mmodel mahasiswa_model. 
-        $data['page'] = $this->page->singlepage($config["per_page"], $data['page']);   
-        
+        $data['page'] = $this->page->singlepage($config["per_page"], $data['page']);
+
         //$data['halloffame'] = $this->halloffamepage($config["per_page"], $data['page']);
         $data['uri'] = $this->uri->segment(3);
         // echo $data['uri']; die;
@@ -63,12 +64,12 @@ class Page extends CI_Controller {
         $link = $this->uri->segment(3);
         $data['MainSlide'] = $this->db->query("SELECT * FROM `slide_img` WHERE `link` = '$link'")->result();
         $data['index_title'] = ucwords($data['MainSlide'][0]->header);
-        $data['og_title'] = "OurCitrus Page | ".$this->uri->segment(3);
-        $data['short_title'] = "OurCitrus Page | ".$this->uri->segment(3);
+        $data['og_title'] = "OurCitrus Page | " . $this->uri->segment(3);
+        $data['short_title'] = "OurCitrus Page | " . $this->uri->segment(3);
         $data['og_description'] = $data['MainSlide'][0]->truncate;
-        $data['og_url'] = "OurCitrus | ".$this->uri->segment(3);        
-        for($i=0; $i<=count($data['page_index'])-1; $i++){
-           $data['og_image'] = base_url('assets/images/page/').$data['page_index'][$i]->img;
+        $data['og_url'] = "OurCitrus | " . $this->uri->segment(3);
+        for ($i = 0; $i <= count($data['page_index']) - 1; $i++) {
+            $data['og_image'] = base_url('assets/images/page/') . $data['page_index'][$i]->img;
         }
         //youtube api
         // $url = "https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=UC1t1vRGxruecjfUb2V5c6Pg&key=AIzaSyBzEfs83S6IeHMIt1AoiV5J5ueJjcx1eSw";
@@ -82,7 +83,7 @@ class Page extends CI_Controller {
         // $latestVideo = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyBzEfs83S6IeHMIt1AoiV5J5ueJjcx1eSw&channelId=UC1t1vRGxruecjfUb2V5c6Pg&maxResults=1&order=date&part=snippet";
         // $data['latestVideo'] = $this->page->get_CURL($latestVideo);
         // $data['latestVideo'] = $data['latestVideo']['items'][0]['id']['videoId'];
-		$this->template->myLayout('page/index', $data);
+        $this->template->myLayout('page/index', $data);
     }
 
     public function read()
@@ -93,7 +94,7 @@ class Page extends CI_Controller {
         // echo "</pre>"; 
         // echo $query['link'];
         // die;
-        $link = strtolower(str_replace('-',' ', $query['url']));
+        $link = strtolower(str_replace('-', ' ', $query['url']));
         $data['index_title'] = $link;
         //===============================================================================================
         //set page untuk price list
@@ -103,29 +104,29 @@ class Page extends CI_Controller {
         //set page untuk halloffame
         // $halloffame = $this->db->get_where('single_page', ['link'=>'halloffame'])->row_array();
         // echo $halloffame['url'];die;
-        $data['halloffameview'] = $this->db->get_where('halloffame', ['url'=>$data['uri']])->row_array();
+        $data['halloffameview'] = $this->db->get_where('halloffame', ['url' => $data['uri']])->row_array();
         // var_dump($data['halloffameview']);
         // echo $data['halloffameview']['url'];
         // die;
         //===============================================================================================
-        $data['num_rows'] = $this->db->get_where('halloffame', ['url'=>$this->uri->segment(3)])->num_rows();
+        $data['num_rows'] = $this->db->get_where('halloffame', ['url' => $this->uri->segment(3)])->num_rows();
         $data['viewpage'] = $this->page->viewpage('single_page');
         $data['kantor'] = $this->db->get_where('single_page', ['url' => 'Kantor-OurCitrus']);
-        $data['uri_title'] = str_replace('-',' ', $this->uri->segment(3));
-        
-        $where = ['url'=>$data['uri']];
+        $data['uri_title'] = str_replace('-', ' ', $this->uri->segment(3));
+
+        $where = ['url' => $data['uri']];
         $data['halloffameread'] = $this->page->halloffame($where);
         // var_dump($data['halloffameread']); die;
         $url = $data['uri'];
         $data['pages'] = $this->db->query("SELECT * FROM `single_page` where `url` = '$url'")->result();
 
         $data['index_title'] = $data['pages'][0]->judul;
-        $data['og_title'] = "OurCitrus Page | ".$this->uri->segment(3);
+        $data['og_title'] = "OurCitrus Page | " . $this->uri->segment(3);
         $data['header_title'] = $data['pages'][0]->judul;
         $data['short_title'] = $this->uri->segment(3);
         $data['og_url'] = $data['pages'][0]->judul;
         $data['og_description'] = $data['pages'][0]->content;
-        $data['og_image'] = base_url('assets/images/page/').$data['pages'][0]->img;
+        $data['og_image'] = base_url('assets/images/page/') . $data['pages'][0]->img;
 
         //youtube api
         // $url = "https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=UC1t1vRGxruecjfUb2V5c6Pg&key=AIzaSyBzEfs83S6IeHMIt1AoiV5J5ueJjcx1eSw";
@@ -140,45 +141,37 @@ class Page extends CI_Controller {
         // $data['latestVideo'] = $this->page->get_CURL($latestVideo);
         // $data['latestVideo'] = $data['latestVideo']['items'][0]['id']['videoId'];
         // echo $data['uri']."<br/><br/>".$data['halloffameview']['url']; die;
-        if($data['halloffameview']['url'] !== $data['uri']):
+        if ($data['halloffameview']['url'] !== $data['uri']) :
             $this->template->myLayout('page/read', $data);
-        else:
-            switch($this->input->post('reaction')){
-                case 'love':
-                    // var_dump($this->input->post()); die;  
-                    $nama = $this->input->post('nama');
-                    $love = $this->input->post('reaction');
-                    $query = "UPDATE `halloffame` SET `love` = `$love`+1 WHERE nama = '$nama'";
-                    $this->db->query($query);
-                break;
-                case 'like':
-                    $nama = $this->input->post('nama');
-                    $like = $this->input->post('reaction');
-                    $query = "UPDATE `halloffame` SET `like` = `$like`+1 WHERE nama = '$nama'";
-                    $this->db->query($query);
-                break;
-                case 'clapping':
-                    $nama = $this->input->post('nama');
-                    $clapping = $this->input->post('reaction');
-                    $query = "UPDATE `halloffame` SET `clapping` = `$clapping`+1 WHERE nama = '$nama'";
-                    $this->db->query($query);
-                break;
-                case 'biceps':
-                    $nama = $this->input->post('nama');
-                    $biceps = $this->input->post('reaction');
-                    $query = "UPDATE `halloffame` SET `biceps` = `$biceps`+1 WHERE nama = '$nama'";
-                    $this->db->query($query);
-                break;
-                case 'fire':
-                    $nama = $this->input->post('nama');
-                    $fire = $this->input->post('reaction');
-                    $query = "UPDATE `halloffame` SET `fire` = `$fire`+1 WHERE nama = '$nama'";
-                    return $this->db->query($query);
-                break;
-            }
+        else :
             $this->template->myLayout('page/halloffameread', $data);
         endif;
     }
 
-
+    public function reaction()
+    {
+        $name = @$this->input->post("name");
+        $reaction = @$this->input->post("reaction");
+        if ($reaction == 'love') {
+            $query = "UPDATE `halloffame` SET `love` = $reaction+1 WHERE `nama` = '$name'";
+            $this->db->query($query);
+            echo $reaction;
+        } elseif ($reaction == 'like') {
+            $query = "UPDATE `halloffame` SET `like` = $reaction+1 WHERE `nama` = '$name'";
+            $this->db->query($query);
+            echo $reaction;
+        } elseif ($reaction == 'clapping') {
+            $query = "UPDATE `halloffame` SET `clapping` = $reaction+1 WHERE `nama` = '$name'";
+            $this->db->query($query);
+            echo $reaction;
+        } elseif ($reaction == 'biceps') {
+            $query = "UPDATE `halloffame` SET `biceps` = $reaction+1 WHERE `nama` = '$name'";
+            $this->db->query($query);
+            echo $reaction;
+        } elseif ($reaction == 'fire') {
+            $query = "UPDATE `halloffame` SET `fire` = $reaction+1 WHERE `nama` = '$name'";
+            $this->db->query($query);
+            echo $reaction;
+        }
+    }
 }
